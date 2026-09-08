@@ -1,12 +1,9 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { DebugComponent } from './debug/debug.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+  imports: [DebugComponent],
+  template: '<app-debug />'
 })
-export class App {
-  protected readonly title = signal('hackathon-transformaciones');
-}
+export class App {}
