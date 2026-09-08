@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { mat2d } from 'gl-matrix';
 import { MatrizService } from './matriz.service';
+import { Matriz2D, mat2dToMatriz2D } from '../models/matriz.model';
 
 export interface EstadoPajaro {
   posY: number;
@@ -24,17 +25,26 @@ export class EstadoFiguraService {
   private readonly POS_X_PAJARO = 100;
   private readonly ANCHO_CANVAS = 480;
 
-  private pajaroSubject = new BehaviorSubject<EstadoPajaro>({
+  private pajaroSubject = new BehaviorSubject<EstadoPajaro>(
+    { posY: 200, velocidadY: 0, angulo: 0, matrizActual: mat2d.create() }
+  );
+
+  private tubosSubject = new BehaviorSubject<EstadoTubo[]>([]);
+
+  private readonly ESTADO_INICIAL: EstadoPajaro = {
     posY: 200,
     velocidadY: 0,
     angulo: 0,
     matrizActual: mat2d.create(),
-  });
-
-  private tubosSubject = new BehaviorSubject<EstadoTubo[]>([]);
+  };
 
   pajaro$ = this.pajaroSubject.asObservable();
   tubos$ = this.tubosSubject.asObservable();
+
+  // Alias para Persona A: expone la matriz como Matriz2D
+  matrizActual$ = this.pajaro$.pipe(
+    map(p => mat2dToMatriz2D(p.matrizActual as Float32Array))
+  );
 
   constructor(private matriz: MatrizService) {}
 
@@ -47,6 +57,12 @@ export class EstadoFiguraService {
   saltar(): void {
     const estado = this.pajaroSubject.value;
     this.pajaroSubject.next({ ...estado, velocidadY: -8 });
+  }
+
+  // Requerido por Persona D para reiniciar el juego
+  reiniciar(): void {
+    this.pajaroSubject.next({ posY: 200, velocidadY: 0, angulo: 0, matrizActual: mat2d.create() });
+    this.tubosSubject.next([]);
   }
 
   agregarTubo(alturaTuboInferior: number): void {
