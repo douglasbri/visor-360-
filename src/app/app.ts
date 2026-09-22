@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { DebugComponent } from './debug/debug.component';
+import { provideHttpClient } from '@angular/common/http';
+import { SwapiComponent } from './swapi/swapi.component';
 
 @Component({
   selector: 'app-root',
-  imports: [DebugComponent],
-  template: '<app-debug />'
+  standalone: true,
+  imports: [SwapiComponent],
+  template: '<app-swapi />'
 })
 export class App {}
