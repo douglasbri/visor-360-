@@ -31,9 +31,12 @@
     "@angular/platform-server": "^20.3.0",
     "@angular/router": "^20.3.0",
     "@angular/ssr": "^20.3.7",
+    "@photo-sphere-viewer/core": "^5.15.1",
+    "@photo-sphere-viewer/markers-plugin": "^5.15.1",
     "express": "^5.1.0",
     "gl-matrix": "^3.4.4",
     "konva": "^10.5.0",
+    "pannellum": "^2.5.7",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },

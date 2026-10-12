@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { provideHttpClient } from '@angular/common/http';
-import { SwapiComponent } from './swapi/swapi.component';
+import { Visor360Component } from './visor360/visor360.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [SwapiComponent],
-  template: '<app-swapi />'
+  imports: [Visor360Component],
+  template: '<app-visor360 />'
 })
 export class App {}
