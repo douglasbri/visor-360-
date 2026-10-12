@@ -1,45 +1,18 @@
-import { Component, ElementRef, OnInit, ViewChild, PLATFORM_ID, Inject, OnDestroy } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import { Viewer } from '@photo-sphere-viewer/core';
-import { MarkersPlugin } from '@photo-sphere-viewer/markers-plugin';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @Component({
   selector: 'app-visor360',
   standalone: true,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './visor360.component.html',
   styleUrl: './visor360.component.scss'
 })
-export class Visor360Component implements OnInit, OnDestroy {
+export class Visor360Component {
+  nombre = 'Douglas Brian Aliaga Quisbert';
+  imagen = 'imagen360.jpg';
+  color = 'red';
 
-  @ViewChild('visor', { static: true }) visorRef!: ElementRef;
-  private viewer!: Viewer;
-
-  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
-
-  ngOnInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.viewer = new Viewer({
-        container: this.visorRef.nativeElement,
-        panorama: 'https://photo-sphere-viewer-data.netlify.app/assets/sphere.jpg',
-        loadingTxt: 'Cargando...',
-        plugins: [
-          [MarkersPlugin, {
-            markers: [
-              {
-                id: 'nombre',
-                position: { yaw: 0, pitch: 0 },
-                html: '<div class="marker-nombre">Douglas Brian Aliaga Quisbert</div>',
-                anchor: 'center center',
-                scale: [0.5, 1.5],
-              }
-            ]
-          }]
-        ]
-      });
-    }
-  }
-
-  ngOnDestroy() {
-    this.viewer?.destroy();
+  cambiarColor() {
+    this.color = this.color === 'red' ? 'white' : 'red';
   }
 }

@@ -33,6 +33,7 @@
     "@angular/ssr": "^20.3.7",
     "@photo-sphere-viewer/core": "^5.15.1",
     "@photo-sphere-viewer/markers-plugin": "^5.15.1",
+    "aframe": "^1.8.0",
     "express": "^5.1.0",
     "gl-matrix": "^3.4.4",
     "konva": "^10.5.0",

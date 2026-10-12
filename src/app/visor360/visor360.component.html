@@ -1,1 +1,26 @@
-<div #visor class="visor"></div>
+<a-scene>
+
+  <a-sky src="imagen360.jpg" rotation="0 -90 0"></a-sky>
+
+  <a-camera position="0 1.6 0">
+    <a-cursor></a-cursor>
+  </a-camera>
+
+  <a-text
+    [attr.value]="nombre"
+    position="0 1.5 -3"
+    align="center"
+    color="white"
+    width="6">
+  </a-text>
+
+  <a-box
+    position="0 0.5 -3"
+    width="1"
+    height="1"
+    depth="1"
+    [attr.color]="color"
+    (click)="cambiarColor()">
+  </a-box>
+
+</a-scene>
